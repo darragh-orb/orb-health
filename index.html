@@ -216,20 +216,35 @@
 
     <!-- COLLABORATION -->
     <section id="collaboration" class="section collaboration" data-nav="light">
-      <div class="image-crop">
-        <div class="image-crop__inner">
+  <div class="image-crop">
+    <div class="image-crop__inner carousel" id="collaborationCarousel" aria-label="Collaboration image carousel">
+      <div class="carousel__track">
+        <div class="carousel__slide">
           <img src="assets/collaboration.jpg" alt="Digital nature installation in clinical environment" />
         </div>
+        <div class="carousel__slide">
+          <img src="assets/cinematic-1.jpg" alt="Nature image used in a healthcare setting" />
+        </div>
+        <div class="carousel__slide">
+          <img src="assets/cinematic-2.jpg" alt="Biophilic visual content for calming clinical spaces" />
+        </div>
       </div>
-<h1></h1>
-      <div class="collaboration__text fade-in">
-        <p>
-          ORB Health is working in collaboration with the Mater Hospital to explore the role of digital nature in
-          clinical spaces. Our work focuses on calm, measurable interventions aligned to clinical workflows, supporting
-          wellbeing for patients, visitors, and staff.
-        </p>
-      </div>
-    </section>
+
+      <div class="carousel__dots"></div>
+
+      <button class="carousel__zone carousel__zone--prev" type="button" aria-label="Previous image"></button>
+      <button class="carousel__zone carousel__zone--next" type="button" aria-label="Next image"></button>
+    </div>
+  </div>
+
+  <div class="collaboration__text fade-in">
+    <p>
+      ORB Health is working in collaboration with the Mater Hospital to explore the role of digital nature in
+      clinical spaces. Our work focuses on calm, measurable interventions aligned to clinical workflows, supporting
+      wellbeing for patients, visitors, and staff.
+    </p>
+  </div>
+</section>
 
     <!-- CONTACT -->
     <section id="contact" class="section contact" data-nav="light">

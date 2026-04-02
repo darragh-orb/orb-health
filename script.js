@@ -133,8 +133,7 @@ window.addEventListener("keydown", (e) => {
 });
 
 // Cinematic carousel
-(function initCinematicCarousel() {
-  const root = document.getElementById("cinematicCarousel");
+function initCarousel(root) {
   if (!root) return;
 
   const track = root.querySelector(".carousel__track");
@@ -143,12 +142,19 @@ window.addEventListener("keydown", (e) => {
   const prevBtn = root.querySelector(".carousel__zone--prev");
   const nextBtn = root.querySelector(".carousel__zone--next");
 
+  if (!track || !slides.length || !dotsWrap || !prevBtn || !nextBtn) return;
+
   let index = 0;
 
   function clampIndex(i) {
     if (i < 0) return slides.length - 1;
     if (i >= slides.length) return 0;
     return i;
+  }
+
+  function updateDots() {
+    const dots = Array.from(dotsWrap.children);
+    dots.forEach((dot, i) => dot.classList.toggle("is-active", i === index));
   }
 
   function goTo(i) {
@@ -160,18 +166,13 @@ window.addEventListener("keydown", (e) => {
   function buildDots() {
     dotsWrap.innerHTML = "";
     slides.forEach((_, i) => {
-      const b = document.createElement("button");
-      b.type = "button";
-      b.className = "carousel__dot";
-      b.setAttribute("aria-label", `Go to image ${i + 1}`);
-      b.addEventListener("click", () => goTo(i));
-      dotsWrap.appendChild(b);
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "carousel__dot";
+      button.setAttribute("aria-label", `Go to image ${i + 1}`);
+      button.addEventListener("click", () => goTo(i));
+      dotsWrap.appendChild(button);
     });
-  }
-
-  function updateDots() {
-    const dots = Array.from(dotsWrap.children);
-    dots.forEach((d, i) => d.classList.toggle("is-active", i === index));
   }
 
   prevBtn.addEventListener("click", () => goTo(index - 1));
@@ -194,11 +195,11 @@ window.addEventListener("keydown", (e) => {
     root.classList.remove("is-hovering", "is-left", "is-right");
   });
 
-  root.style.setProperty("--cx", `50%`);
-  root.style.setProperty("--cy", `50%`);
+  root.style.setProperty("--cx", "50%");
+  root.style.setProperty("--cy", "50%");
 
-  // Touch swipe (mobile)
   let startX = null;
+
   root.addEventListener(
     "touchstart",
     (e) => {
@@ -211,6 +212,7 @@ window.addEventListener("keydown", (e) => {
     "touchend",
     (e) => {
       if (startX === null) return;
+
       const endX = e.changedTouches[0].clientX;
       const dx = endX - startX;
       startX = null;
@@ -224,4 +226,7 @@ window.addEventListener("keydown", (e) => {
 
   buildDots();
   goTo(0);
-})();
+}
+
+/* Initialise ALL carousels on the page */
+document.querySelectorAll(".image-crop__inner.carousel").forEach(initCarousel);
