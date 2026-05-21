@@ -101,18 +101,23 @@ if (!reduceMotion && hero && heroBg && heroText) {
 // Mobile nav (full-screen)
 const navToggle = document.getElementById("navToggle");
 const mobileNav = document.getElementById("mobileNav");
-const navClose = document.getElementById("navClose");
 
 function openMenu() {
   mobileNav.classList.add("is-open");
+  navToggle.classList.add("is-open");
+  topbar.classList.add("menu-open");
   navToggle.setAttribute("aria-expanded", "true");
+  navToggle.setAttribute("aria-label", "Close menu");
   mobileNav.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
 }
 
 function closeMenu() {
   mobileNav.classList.remove("is-open");
+  navToggle.classList.remove("is-open");
+  topbar.classList.remove("menu-open");
   navToggle.setAttribute("aria-expanded", "false");
+  navToggle.setAttribute("aria-label", "Open menu");
   mobileNav.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
 }
@@ -121,8 +126,6 @@ navToggle?.addEventListener("click", () => {
   const isOpen = mobileNav.classList.contains("is-open");
   isOpen ? closeMenu() : openMenu();
 });
-
-navClose?.addEventListener("click", closeMenu);
 
 document.querySelectorAll(".mobile-nav__link").forEach((link) => {
   link.addEventListener("click", closeMenu);

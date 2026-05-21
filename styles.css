@@ -143,6 +143,7 @@ h2{
   background: transparent;
   cursor: pointer;
   color: inherit;
+  position: relative;  /* needed for z-index */
 }
 
 .nav-toggle__bar{
@@ -151,10 +152,32 @@ h2{
   height: 2px;
   background: currentColor;
   border-radius: 2px;
+  transform-origin: center;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.25s ease;
 }
 
 .nav-toggle__bar + .nav-toggle__bar{
   margin-top: 6px;
+}
+
+/* Burger → X */
+.nav-toggle.is-open .nav-toggle__bar:nth-child(1){
+  transform: translateY(8px) rotate(45deg);
+}
+.nav-toggle.is-open .nav-toggle__bar:nth-child(2){
+  opacity: 0;
+  transform: scaleX(0);
+}
+.nav-toggle.is-open .nav-toggle__bar:nth-child(3){
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* mobile-nav lives inside the topbar stacking context (z-index: 60).
+   Raise the toggle above it so the X stays visible over the overlay. */
+.nav-toggle.is-open{
+  z-index: 70;
+  color: rgba(15,26,20,.85);
 }
 
 @media (max-width: 920px){
@@ -169,11 +192,16 @@ h2{
   position: fixed;
   inset: 0;
   z-index: 60;
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
 }
 
 .mobile-nav.is-open{
-  display: block;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .mobile-nav__screen{
@@ -184,31 +212,12 @@ h2{
   padding: 22px var(--pad);
   display: flex;
   flex-direction: column;
+  transform: translateY(-10px);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.mobile-nav__top{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-}
-
-.mobile-nav__brand{
-  font-weight: 600;
-  letter-spacing: .2px;
-  font-size: 16px;
-}
-
-.mobile-nav__close{
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
-  border: 1px solid rgba(15,26,20,.14);
-  background: transparent;
-  cursor: pointer;
-  font-size: 18px;
-  line-height: 1;
-  color: rgba(15,26,20,.85);
+.mobile-nav.is-open .mobile-nav__screen{
+  transform: translateY(0);
 }
 
 .mobile-nav__links{
@@ -220,6 +229,7 @@ h2{
   gap: 22px;
 }
 
+/* Links start invisible and shifted down */
 .mobile-nav__link{
   font-size: clamp(28px, 6.2vw, 44px);
   line-height: 1.08;
@@ -227,11 +237,24 @@ h2{
   color: rgba(15,26,20,.88);
   text-decoration: none;
   padding: 8px 0;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
+
+/* Stagger in when menu opens */
+.mobile-nav.is-open .mobile-nav__link{
+  opacity: 1;
+  transform: translateY(0);
+}
+.mobile-nav.is-open .mobile-nav__link:nth-child(1){ transition-delay: 0.08s; }
+.mobile-nav.is-open .mobile-nav__link:nth-child(2){ transition-delay: 0.16s; }
+.mobile-nav.is-open .mobile-nav__link:nth-child(3){ transition-delay: 0.24s; }
+.mobile-nav.is-open .mobile-nav__link:nth-child(4){ transition-delay: 0.32s; }
 
 .mobile-nav__link:hover{
   text-decoration: none;
-  opacity: .85;
+  opacity: .7;
 }
 
 .mobile-nav__primary{
@@ -246,9 +269,27 @@ h2{
   border-top: 1px solid rgba(15,26,20,.08);
   font-size: 14px;
   color: rgba(15,26,20,.70);
+  opacity: 0;
+  transition: opacity 0.4s ease 0.38s;
+}
+
+.mobile-nav.is-open .mobile-nav__footer{
+  opacity: 1;
 }
 
 .mobile-nav__footer a:hover{ text-decoration: underline; }
+
+@media (prefers-reduced-motion: reduce){
+  .nav-toggle__bar,
+  .mobile-nav,
+  .mobile-nav__screen,
+  .mobile-nav__link,
+  .mobile-nav__footer{
+    transition: none;
+  }
+  .mobile-nav{ display: none; }
+  .mobile-nav.is-open{ display: block; opacity: 1; visibility: visible; }
+}
 
 /* =========================
    SECTIONS
@@ -602,7 +643,7 @@ h2{
    ========================= */
 .collaboration{
   background: #ffffff;
-  padding: 0 var(--pad) calc(var(--pad) * 4);
+  padding: 0 var(--pad);
 }
 
 .collaboration .image-crop{
@@ -615,7 +656,7 @@ h2{
 .collaboration__text{
   max-width: var(--cinematic-max);
   margin: 0 auto;
-  padding-bottom: calc(var(--pad) * 3.6);
+  padding-bottom: calc(var(--pad) * 1.26);
 }
 
 .collaboration__text p{
@@ -734,7 +775,7 @@ h2{
    PRODUCT LABEL
    ========================= */
 .product-label{
-  font-size: 11px;
+  font-size: 20px;
   font-weight: 600;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -819,9 +860,6 @@ h2{
 @media (max-width: 720px){
   .stats__grid{
     grid-template-columns: 1fr;
-  }
-  .stats__item{
-    padding: 28px 20px;
   }
 }
 
@@ -977,5 +1015,77 @@ h2{
   .how-it-works__inner{
     grid-template-columns: 1fr;
     gap: 32px;
+  }
+}
+
+/* =========================
+   MOBILE IMPROVEMENTS
+   ========================= */
+@media (max-width: 768px){
+
+  /* — Mission: fix horizontal padding to match all other sections, left-align —  */
+  .mission{
+    min-height: unset;
+    padding: calc(var(--pad) * 2.4) var(--pad);
+  }
+  .mission__inner{
+    justify-content: flex-start;
+  }
+  .mission-statement{
+    text-align: left;
+    max-width: none;
+  }
+  .product-label{
+    text-align: left;
+  }
+
+  /* — Stats: left-align, reduce padding, stack neatly — */
+  .stats{
+    padding: calc(var(--pad) * 2) var(--pad);
+  }
+  .stats__inner{
+    text-align: left;
+  }
+  .stats__source{
+    margin-bottom: 20px;
+  }
+  .stats__item{
+    padding: 24px 20px;
+    gap: 8px;
+  }
+  .stats__quote{
+    max-width: none;
+    padding: 20px 22px;
+    text-align: left;
+  }
+
+  /* — Research: reduce top padding on mobile — */
+  .research{
+    padding-top: calc(var(--pad) * 1.6);
+  }
+
+  /* — Collaboration: tighter bottom padding — */
+  .collaboration{
+    padding-bottom: calc(var(--pad) * 2);
+  }
+  .collaboration__text{
+    padding-bottom: calc(var(--pad) * 1.6);
+  }
+
+  /* — How it works: tighter vertical padding — */
+  .how-it-works{
+    padding-top: calc(var(--pad) * 2);
+    padding-bottom: calc(var(--pad) * 2);
+  }
+
+  /* — Contact: fix horizontal padding + left-align on mobile — */
+  .contact{
+    padding: calc(var(--pad) * 3) var(--pad);
+  }
+  .contact-content{
+    text-align: left;
+  }
+  .contact__inner{
+    justify-content: flex-start;
   }
 }
