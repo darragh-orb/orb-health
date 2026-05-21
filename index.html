@@ -111,12 +111,16 @@
 
   <main>
     <!-- HERO (100vh) -->
-    <section class="section hero" id="hero" style="--bg-img: url('assets/hero.jpg');" data-nav="dark">
-      <div class="hero__bg" aria-hidden="true"></div>
+    <section class="section hero" id="hero" data-nav="dark">
+      <div class="hero__bg" aria-hidden="true">
+        <video autoplay muted loop playsinline>
+          <source src="assets/website_video.mp4" type="video/mp4">
+        </video>
+      </div>
       <div class="overlay overlay--soft" aria-hidden="true"></div>
 
       <div class="hero__content" id="heroText">
-        <h1>Humanising healthcare through nature and innovation</h1>
+        <h1>A managed digital art display service to enhance hospital&nbsp;spaces</h1>
       </div>
     </section>
 
@@ -174,8 +178,8 @@
             <span class="stats__label">said it made their experience more pleasant</span>
           </div>
         </div>
-        <blockquote class="stats__quote fade-in">
-          <p>"It was so drab outside — these were just vibrant. Gave me a little lift."</p>
+        <blockquote class="pull-quote fade-in">
+          <p>It was so drab outside — these were just vibrant. Gave me a little lift.</p>
           <cite>Patient, Mater Misericordiae University Hospital</cite>
         </blockquote>
       </div>
@@ -186,10 +190,6 @@
       <div class="research__inner">
         <div class="research__title fade-in">
           <h2>Backed by peer-reviewed research</h2>
-          <blockquote class="staff-quote">
-            <p>"They are absolutely beautiful and I look forward to seeing them each day — they are a great addition to the hospital."</p>
-            <cite>Staff member, Mater Misericordiae University Hospital</cite>
-          </blockquote>
         </div>
 
         <div class="research__copy fade-in">
@@ -216,6 +216,16 @@
             </li>
           </ul>
         </div>
+      </div>
+    </section>
+
+    <!-- STAFF QUOTE -->
+    <section class="section pull-quote-section" data-nav="light">
+      <div class="pull-quote-section__inner">
+        <blockquote class="pull-quote fade-in">
+          <p>They are absolutely beautiful and I look forward to seeing them each day — they are a great addition to the hospital.</p>
+          <cite>Staff member, Mater Misericordiae University Hospital</cite>
+        </blockquote>
       </div>
     </section>
 
