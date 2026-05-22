@@ -71,10 +71,10 @@
 
       <!-- Desktop nav -->
       <nav class="topbar__nav" aria-label="Primary">
-        <a href="#mission">Mission</a>
-        <a href="#research">Research</a>
-        <a href="#collaboration">Collaboration</a>
-        <a class="nav-cta" href="#contact">Contact</a>
+        <a href="#mission">Product</a>
+        <a href="#evidence">Evidence</a>
+        <a href="#collaboration">In Practice</a>
+        <a class="nav-cta" href="#contact">Get in Touch</a>
       </nav>
 
       <!-- Mobile toggle -->
@@ -96,10 +96,10 @@
     <div class="mobile-nav" id="mobileNav" aria-hidden="true">
       <div class="mobile-nav__screen">
         <nav class="mobile-nav__links" aria-label="Mobile navigation">
-          <a href="#mission" class="mobile-nav__link">Mission</a>
-          <a href="#research" class="mobile-nav__link">Research</a>
-          <a href="#collaboration" class="mobile-nav__link">Collaboration</a>
-          <a href="#contact" class="mobile-nav__link mobile-nav__primary">Contact</a>
+          <a href="#mission" class="mobile-nav__link">Product</a>
+          <a href="#evidence" class="mobile-nav__link">Evidence</a>
+          <a href="#collaboration" class="mobile-nav__link">In Practice</a>
+          <a href="#contact" class="mobile-nav__link mobile-nav__primary">Get in Touch</a>
         </nav>
 
         <div class="mobile-nav__footer">
@@ -120,7 +120,7 @@
       </div>
 
       <div class="hero__content" id="heroText">
-        <h1>A managed digital art display service to enhance hospital&nbsp;spaces</h1>
+        <h1><span style="font-weight: 700">The Art Frame</span> transforms how hospital&nbsp;spaces feel</h1>
       </div>
     </section>
 
@@ -143,13 +143,22 @@
       <div class="image-crop__inner carousel" id="cinematicCarousel" aria-label="Image carousel">
         <div class="carousel__track">
           <div class="carousel__slide">
-            <img src="assets/cinematic-1.jpg" alt="Calming nature scene for clinical environments" />
+            <picture>
+              <source srcset="assets/cinematic-1_mobile.jpg" media="(max-width: 768px)">
+              <img src="assets/cinematic-1.jpg" alt="Calming nature scene for clinical environments" />
+            </picture>
           </div>
           <div class="carousel__slide">
-            <img src="assets/cinematic-2.jpg" alt="Biophilic imagery in a modern healthcare space" />
+            <picture>
+              <source srcset="assets/cinematic-2_mobile.jpg" media="(max-width: 768px)">
+              <img src="assets/cinematic-2.jpg" alt="Biophilic imagery in a modern healthcare space" />
+            </picture>
           </div>
           <div class="carousel__slide">
-            <img src="assets/cinematic-3.jpg" alt="Soft daylight and nature textures for calming spaces" />
+            <picture>
+              <source srcset="assets/cinematic-3_mobile.jpg" media="(max-width: 768px)">
+              <img src="assets/cinematic-3.jpg" alt="Soft daylight and nature textures for calming spaces" />
+            </picture>
           </div>
         </div>
 
@@ -161,7 +170,7 @@
     </section>
 
     <!-- STATS -->
-    <section class="section stats" data-nav="light">
+    <section id="evidence" class="section stats" data-nav="light">
       <div class="stats__inner">
         <p class="stats__source">Mater Misericordiae University Hospital — Public Survey, 101 responses</p>
         <div class="stats__grid">
