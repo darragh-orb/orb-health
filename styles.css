@@ -920,6 +920,15 @@ h2{
   text-align: center;
 }
 
+.stats__heading{
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: rgba(15,26,20,.9);
+  text-align: center;
+  margin: 0 0 16px 0;
+}
+
 .stats__source{
   font-size: 12px;
   letter-spacing: .06em;
