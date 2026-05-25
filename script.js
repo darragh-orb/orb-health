@@ -43,60 +43,6 @@ updateNavColour();
 window.addEventListener("scroll", updateNavColour, { passive: true });
 window.addEventListener("resize", updateNavColour);
 
-// Better, smoothed hero parallax
-const hero = document.getElementById("hero");
-const heroBg = hero?.querySelector(".hero__bg");
-const heroText = document.getElementById("heroText");
-
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-let currentBg = 0;
-let currentText = 0;
-let targetBg = 0;
-let targetText = 0;
-
-function clamp(n, min, max) {
-  return Math.max(min, Math.min(max, n));
-}
-
-function lerp(a, b, t) {
-  return a + (b - a) * t;
-}
-
-function computeTargets() {
-  if (!hero || !heroBg || !heroText) return;
-
-  const rect = hero.getBoundingClientRect();
-  const vh = window.innerHeight;
-
-  const progress = clamp((vh - rect.top) / (vh + rect.height), 0, 1);
-
-  targetBg = -progress * 18;
-  targetText = progress * 10;
-}
-
-function animate() {
-  if (!hero || !heroBg || !heroText) return;
-
-  const ease = 0.09;
-
-  currentBg = lerp(currentBg, targetBg, ease);
-  currentText = lerp(currentText, targetText, ease);
-
-  heroBg.style.transform = `translate3d(0, ${currentBg}px, 0) scale(1.06)`;
-  heroText.style.transform = `translate3d(0, ${currentText}px, 0)`;
-
-  requestAnimationFrame(animate);
-}
-
-if (!reduceMotion && hero && heroBg && heroText) {
-  computeTargets();
-  window.addEventListener("scroll", computeTargets, { passive: true });
-  window.addEventListener("resize", computeTargets);
-  requestAnimationFrame(animate);
-} else {
-  if (heroText) heroText.style.transform = "none";
-}
 
 // Mobile nav (full-screen)
 const navToggle = document.getElementById("navToggle");
