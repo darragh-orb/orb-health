@@ -1054,6 +1054,16 @@ h2{
   line-height: 1.4;
 }
 
+.research-citations span a{
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.research-citations span a:hover{
+  color: rgba(15,26,20,.8);
+}
+
 /* =========================
    HOW IT WORKS
    ========================= */
