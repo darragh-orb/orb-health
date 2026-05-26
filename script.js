@@ -1,3 +1,13 @@
+// Mobile video source switching
+const heroVideo = document.getElementById("heroVideo");
+if (heroVideo) {
+  const src = window.innerWidth <= 768
+    ? "assets/website_video_mobile.mp4"
+    : "assets/website_video.mp4";
+  heroVideo.querySelector("source").src = src;
+  heroVideo.load();
+}
+
 // Footer year
 document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -80,6 +90,28 @@ document.querySelectorAll(".mobile-nav__link").forEach((link) => {
 window.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeMenu();
 });
+
+// Word-by-word quote animation
+document.querySelectorAll('.pull-quote p').forEach(p => {
+  const words = p.textContent.trim().split(/\s+/);
+  p.innerHTML = words
+    .map((w, i) => `<span class="word" style="transition-delay:${i * 0.07}s">${w}</span>`)
+    .join(' ');
+});
+
+const quoteObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.word').forEach(w => w.classList.add('is-visible'));
+        quoteObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.15 }
+);
+
+document.querySelectorAll('.pull-quote').forEach(q => quoteObserver.observe(q));
 
 // Cinematic carousel
 function initCarousel(root) {
