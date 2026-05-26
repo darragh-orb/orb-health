@@ -419,7 +419,7 @@ h2{
 
 .mission-statement h2{
   margin: 0;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 1.4;
   letter-spacing: -0.01em;
   font-size: clamp(26px, 2.6vw, 36px);
@@ -601,7 +601,7 @@ h2{
 .research__title h2{
   margin: 0;
   font-weight: 400;
-  font-size: clamp(32px, 3.4vw, 48px);
+  font-size: clamp(28px, 3vw, 42px);
   line-height: 1.15;
   letter-spacing: -0.02em;
   color: var(--ink);
@@ -686,7 +686,7 @@ h2{
 .collaboration__text p{
   margin: 0;
   max-width: 70%;
-  font-weight: 400;
+  font-weight: 300;
   font-size: clamp(26px, 2.6vw, 36px);
   line-height: 1.4;
   letter-spacing: -0.01em;
@@ -1242,6 +1242,23 @@ h2{
   .how-it-works{
     padding-top: calc(var(--pad) * 2);
     padding-bottom: calc(var(--pad) * 2);
+  }
+
+  /* — Hero: dark gradient behind text on mobile — */
+  .hero::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 55%;
+    background: linear-gradient(to top, rgba(0,0,0,.65), transparent);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero__content{
+    position: relative;
+    z-index: 1;
   }
 
 }
