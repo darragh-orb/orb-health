@@ -1304,8 +1304,9 @@ h2{
 
   /* — Hero: account for browser chrome on mobile — */
   .hero{
-    min-height: 100svh;
-    padding-bottom: 120px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding-bottom: 180px;
   }
 
   /* — Hero: dark gradient behind text on mobile — */
