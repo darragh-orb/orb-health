@@ -578,12 +578,6 @@ h2{
   .image-crop__inner.carousel{ cursor: default; }
   .carousel__zone{ cursor: pointer; }
   .image-crop__inner.carousel::after{ display: none; }
-  .carousel__slide--desktop-only{
-    display: none;
-    flex: 0 0 0;
-    width: 0;
-    overflow: hidden;
-  }
 }
 
 /* =========================

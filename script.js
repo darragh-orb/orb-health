@@ -118,10 +118,10 @@ function initCarousel(root) {
   if (!root) return;
 
   const track = root.querySelector(".carousel__track");
-  const isMobile = window.innerWidth <= 768;
-  const slides = Array.from(root.querySelectorAll(".carousel__slide")).filter(
-    s => !isMobile || !s.classList.contains("carousel__slide--desktop-only")
-  );
+  if (window.innerWidth <= 768) {
+    root.querySelectorAll(".carousel__slide--desktop-only").forEach(s => s.remove());
+  }
+  const slides = Array.from(root.querySelectorAll(".carousel__slide"));
   const dotsWrap = root.querySelector(".carousel__dots");
   const prevBtn = root.querySelector(".carousel__zone--prev");
   const nextBtn = root.querySelector(".carousel__zone--next");
