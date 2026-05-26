@@ -573,11 +573,17 @@ h2{
   .carousel__track{ transition: none; }
 }
 
-/* Mobile: allow normal cursor */
+/* Mobile: allow normal cursor, hide desktop-only slides */
 @media (max-width: 768px){
   .image-crop__inner.carousel{ cursor: default; }
   .carousel__zone{ cursor: pointer; }
   .image-crop__inner.carousel::after{ display: none; }
+  .carousel__slide--desktop-only{
+    display: none;
+    flex: 0 0 0;
+    width: 0;
+    overflow: hidden;
+  }
 }
 
 /* =========================
